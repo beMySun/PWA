@@ -1,10 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>hello</title>
+   <title>Hello PWA World!</title>
+    <meta charset='UTF-8'>
+    <meta name='viewport'
+          content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover'>
+  <meta http-equiv=“Content-Security-Policy” content=“default-src ‘self’ gap://ready file://* *; style-src ‘self’ ‘unsafe-inline’; script-src ‘self’ ‘unsafe-inline’ ‘unsafe-eval’”/>
+  <meta name="theme-color" content="#317EFB"/>
+  <meta name="Description" content="PWA demo">
+  <title>Progressive Times - Online News</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway|Merriweather" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="./css/site.css">
+  <link rel="manifest" href="./manifest.json" />
 </head>
 <body>
-	
+  <!-- header -->
+  <div id="header">
+    <h1> PWA Times</h1>
+  </div>
+  <!-- latest news -->
+  <div id="latest"></div>
+  <hr>
+  <!-- javaScript -->
+  <script async src="./js/main.js"></script>
+  <script>
+  // Register the service worker
+    if ('serviceWorker' in navigator) {
+      // 判断浏览器是否支持Service Worker
+      console.log('浏览器是否支持Service Worker: 支持');
+
+      navigator.serviceWorker.register('./sw.js')
+        .then(function(registration) {
+          // 注册成功
+          console.log('serviceWorker注册成功');
+
+          var serviceWorker;
+          var currentRegisterStatus = '';
+          if (registration.installing) {
+            serviceWorker = registration.installing;
+            currentRegisterStatus = 'installing';
+          } else if (registration.waiting) {
+            serviceWorker = registration.waiting;
+            currentRegisterStatus = 'waiting';
+          } else if (registration.active) {
+            serviceWorker = registration.active;
+            currentRegisterStatus = 'active';
+          }
+
+          console.log('当前注册状态:', currentRegisterStatus);
+
+          if (serviceWorker) {
+            swStatus = serviceWorker.state;
+            console.log('service worker 状态:', swStatus);
+
+            // 监听状态变化
+            serviceWorker.addEventListener('statechange', function (e) {
+              console.log('service worker 变化:', e.target.state);
+            });
+          }
+
+        })
+        .catch(function(resp){
+          console.log('注册失败')
+        })
+    } else {
+      browserSupport = '不支持';
+    }
+
+    if (!navigator.onLine) {
+      console.log('网络状态: Offline');
+    } else {
+       console.log('网络状态: Online');
+    }
+  </script>
 </body>
 </html>

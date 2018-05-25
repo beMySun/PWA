@@ -1,0 +1,5 @@
+body{ font-family: 'Raleway', sans-serif; margin:0; text-align: center;}
+h1 { text-align: center;font-size: 40px;font-family: 'Merriweather', cursive;margin:0;}
+p { width: 70%; margin: auto; font-size: 18px; }
+#header { background-color: gold;height: 80px;}
+#latest { text-align: center;}
