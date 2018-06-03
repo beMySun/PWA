@@ -9,9 +9,7 @@ Minimal PWA
 This demo app runs on `localhost`.
 
 ```bash
-  yarn
-
-  yarn start
+  yarn && yarn start
 ```
 
 Then open <http://localhost:8080> with Chrome.
